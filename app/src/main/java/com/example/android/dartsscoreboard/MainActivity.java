@@ -1,5 +1,7 @@
 package com.example.android.dartsscoreboard;
 
+import android.graphics.Color;
+import android.widget.ImageView;
 import android.widget.TextView;
 
         import android.support.v7.app.AppCompatActivity;
@@ -46,6 +48,17 @@ public class MainActivity extends AppCompatActivity {
 
         whoIsPlaying = "Player1";
 
+        ImageView player2Dart1 = findViewById(R.id.player2_dart1);
+        player2Dart1.setVisibility(View.INVISIBLE);
+
+        ImageView player2Dart2 = findViewById(R.id.player2_dart2);
+        player2Dart2.setVisibility(View.INVISIBLE);
+
+        ImageView player2Dart3 = findViewById(R.id.player2_dart3);
+        player2Dart3.setVisibility(View.INVISIBLE);
+
+        TextView player1Title = findViewById(R.id.player1title);
+        player1Title.setTextColor(Color.RED);
     }
 
     public void displayForPlayer1(int score) {
