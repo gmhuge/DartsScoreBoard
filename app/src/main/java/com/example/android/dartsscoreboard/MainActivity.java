@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
         player2Dart3.setVisibility(View.INVISIBLE);
 
         TextView player1Title = findViewById(R.id.player1title);
-        player1Title.setTextColor(Color.RED);
+//        player1Title.setTextColor(Color.RED);
+        player1Title.setBackgroundColor(Color.RED);
     }
 
     public void displayForPlayer1(int score) {
