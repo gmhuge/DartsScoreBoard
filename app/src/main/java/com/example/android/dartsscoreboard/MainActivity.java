@@ -18,7 +18,14 @@ public class MainActivity extends AppCompatActivity {
     int scorePlayer1 = 0;
     int scorePlayer2 = 0;
 
-    String whoIsPlaying = "";
+    int scorePlayer1Temporary = 0;
+    int scorePlayer2Temporary = 0;
+
+    int player1DartsCount = 0;
+    int player2DartsCount = 0;
+
+
+    String gameStatus = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,20 +53,18 @@ public class MainActivity extends AppCompatActivity {
         scorePlayer2 = 301;
         displayForPlayer2(scorePlayer2);
 
-        whoIsPlaying = "Player1";
+        gameStatus = "Player1";
 
-        ImageView player2Dart1 = findViewById(R.id.player2_dart1);
-        player2Dart1.setVisibility(View.INVISIBLE);
-
-        ImageView player2Dart2 = findViewById(R.id.player2_dart2);
-        player2Dart2.setVisibility(View.INVISIBLE);
-
-        ImageView player2Dart3 = findViewById(R.id.player2_dart3);
-        player2Dart3.setVisibility(View.INVISIBLE);
 
         TextView player1Title = findViewById(R.id.player1title);
 //        player1Title.setTextColor(Color.RED);
         player1Title.setBackgroundColor(Color.RED);
+
+        player1DartsCount = 3;
+        visualizePlayer1Darts(player1DartsCount);
+
+        player2DartsCount = 0;
+        visualizePlayer2Darts(player2DartsCount);
     }
 
     public void displayForPlayer1(int score) {
@@ -68,6 +73,96 @@ public class MainActivity extends AppCompatActivity {
 
   //      TextView Pla
     }
+
+//--------------------------------------------------------------------------
+    public  void player1go (View view) {
+
+        NumberPicker player1picker = findViewById(R.id.player1picker);
+  //      scorePlayer1 = scorePlayer1 - player1picker.getValue();
+  //      makeCast("Player1", scorePlayer1);
+          makeCast("Player1", player1picker.getValue());
+    }
+
+
+    public void visualizePlayer1Darts (int count) {
+
+        ImageView player1Dart1 = findViewById(R.id.player1_dart1);
+        ImageView player1Dart2 = findViewById(R.id.player1_dart2);
+        ImageView player1Dart3 = findViewById(R.id.player1_dart3);
+        if (count == 0) {
+            player1Dart1.setVisibility(View.INVISIBLE);
+            player1Dart2.setVisibility(View.INVISIBLE);
+            player1Dart3.setVisibility(View.INVISIBLE);
+        }
+        if (count == 1) {
+            player1Dart1.setVisibility(View.VISIBLE);
+            player1Dart2.setVisibility(View.INVISIBLE);
+            player1Dart3.setVisibility(View.INVISIBLE);
+        }
+        if (count == 2) {
+            player1Dart1.setVisibility(View.VISIBLE);
+            player1Dart2.setVisibility(View.VISIBLE);
+            player1Dart3.setVisibility(View.INVISIBLE);
+        }
+        if (count == 3) {
+            player1Dart1.setVisibility(View.VISIBLE);
+            player1Dart2.setVisibility(View.VISIBLE);
+            player1Dart3.setVisibility(View.VISIBLE);
+        }
+    }
+    public void visualizePlayer2Darts (int count) {
+        ImageView player2Dart1 = findViewById(R.id.player2_dart1);
+        ImageView player2Dart2 = findViewById(R.id.player2_dart2);
+        ImageView player2Dart3 = findViewById(R.id.player2_dart3);
+        if (count == 0) {
+            player2Dart1.setVisibility(View.INVISIBLE);
+            player2Dart2.setVisibility(View.INVISIBLE);
+            player2Dart3.setVisibility(View.INVISIBLE);
+        }
+        if (count == 1) {
+            player2Dart1.setVisibility(View.VISIBLE);
+            player2Dart2.setVisibility(View.INVISIBLE);
+            player2Dart3.setVisibility(View.INVISIBLE);
+        }
+        if (count == 2) {
+            player2Dart1.setVisibility(View.VISIBLE);
+            player2Dart2.setVisibility(View.VISIBLE);
+            player2Dart3.setVisibility(View.INVISIBLE);
+        }
+        if (count == 3) {
+            player2Dart1.setVisibility(View.VISIBLE);
+            player2Dart2.setVisibility(View.VISIBLE);
+            player2Dart3.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void makeCast (String whoIsCasts, int rate) {
+
+        if (gameStatus.equals(whoIsCasts)) {
+            if (whoIsCasts.equals("Player1") && player1DartsCount > 0) {
+                player1DartsCount = player1DartsCount - 1;
+                visualizePlayer1Darts(player1DartsCount);
+                scorePlayer1Temporary = scorePlayer1;
+                scorePlayer1 = scorePlayer1 - rate;
+                if (scorePlayer1 < 0) {
+                    scorePlayer1 = scorePlayer1Temporary;
+                }
+                else {
+
+                    displayForPlayer1(scorePlayer1);
+
+                }
+
+
+            }
+
+
+
+        }
+
+
+    }
+//-----------------------------------------------------------------------------
 
     public void add3TeamA (View view) {
         scorePlayer1 = scorePlayer1 + 3;

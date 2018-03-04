@@ -116,7 +116,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:onClick="add3TeamA"
+                            android:onClick="player1go"
                             android:backgroundTint="#00f2ff"
                             android:text="Go" />
 
@@ -257,10 +257,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:onClick="add3TeamA"
-                            android:textAllCaps="false"
                             android:backgroundTint="#00a2ff"
-                            android:text="x 2" />
+                            android:onClick="add3TeamA"
+                            android:text="x 2"
+                            android:textAllCaps="false" />
 
                         <Button
                             android:id="@+id/player2_go"
