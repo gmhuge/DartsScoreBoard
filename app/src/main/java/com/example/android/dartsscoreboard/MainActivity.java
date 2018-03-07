@@ -9,8 +9,9 @@ import android.widget.TextView;
         import android.view.View;
         import android.widget.NumberPicker;
         import android.widget.TextView;
+import android.widget.Toast;
 
-        import com.example.android.dartsscoreboard.R;
+import com.example.android.dartsscoreboard.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void initiateNewGame() {
 
-        scorePlayer1 = 301;
+        scorePlayer1 = 30;
         displayForPlayer1(scorePlayer1);
 
         scorePlayer2 = 301;
@@ -57,8 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         TextView player1Title = findViewById(R.id.player1title);
-//        player1Title.setTextColor(Color.RED);
         player1Title.setBackgroundColor(Color.RED);
+        TextView player2Title = findViewById(R.id.player2title);
+        player2Title.setBackgroundColor(Color.TRANSPARENT);
 
         player1DartsCount = 3;
         visualizePlayer1Darts(player1DartsCount);
@@ -73,16 +75,21 @@ public class MainActivity extends AppCompatActivity {
 
   //      TextView Pla
     }
-
+    public void displayForPlayer2(int score) {
+        TextView scoreView = findViewById(R.id.player2_score);
+        scoreView.setText(String.valueOf(score));
+    }
 //--------------------------------------------------------------------------
     public  void player1go (View view) {
-
         NumberPicker player1picker = findViewById(R.id.player1picker);
-  //      scorePlayer1 = scorePlayer1 - player1picker.getValue();
-  //      makeCast("Player1", scorePlayer1);
-          makeCast("Player1", player1picker.getValue());
+        makeCast("Player1", player1picker.getValue());
     }
 
+    public  void player2go (View view) {
+
+        NumberPicker player2picker = findViewById(R.id.player2picker);
+        makeCast("Player2", player2picker.getValue());
+    }
 
     public void visualizePlayer1Darts (int count) {
 
@@ -139,7 +146,12 @@ public class MainActivity extends AppCompatActivity {
     public void makeCast (String whoIsCasts, int rate) {
 
         if (gameStatus.equals(whoIsCasts)) {
+            TextView player1Title = findViewById(R.id.player1title);
+            TextView player2Title = findViewById(R.id.player2title);
+
             if (whoIsCasts.equals("Player1") && player1DartsCount > 0) {
+
+
                 player1DartsCount = player1DartsCount - 1;
                 visualizePlayer1Darts(player1DartsCount);
                 scorePlayer1Temporary = scorePlayer1;
@@ -147,14 +159,75 @@ public class MainActivity extends AppCompatActivity {
                 if (scorePlayer1 < 0) {
                     scorePlayer1 = scorePlayer1Temporary;
                 }
-                else {
+//                else {
 
                     displayForPlayer1(scorePlayer1);
+                    if (player1DartsCount == 0) {
+                        gameStatus = "Player2";
+                        player1Title.setBackgroundColor(Color.TRANSPARENT);
+                        player1DartsCount = 0;
+                        visualizePlayer1Darts(player1DartsCount);
+
+                        player2Title.setBackgroundColor(Color.RED);
+                        player2DartsCount = 3;
+                        visualizePlayer2Darts(player2DartsCount);
+                    }
+
+//                }
+                if (scorePlayer1 == 0) {
+
+                    player1Title.setBackgroundColor(Color.TRANSPARENT);
+                    player2Title.setBackgroundColor(Color.TRANSPARENT);
+                    TextView scoreView = findViewById(R.id.player1_score);
+                    scoreView.setText("WINNER");
+                    gameStatus = "GameOver";
+
+                    // Game Over
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "GAME OVER! Player 1 WINS", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+            else if (whoIsCasts.equals("Player2") && player2DartsCount > 0) {
+
+                    player2DartsCount = player2DartsCount - 1;
+                    visualizePlayer2Darts(player2DartsCount);
+                    scorePlayer2Temporary = scorePlayer2;
+                    scorePlayer2 = scorePlayer2 - rate;
+                    if (scorePlayer2 < 0) {
+                        scorePlayer2 = scorePlayer2Temporary;
+                    }
+//                    else {
+
+                        displayForPlayer2(scorePlayer2);
+                        if (player2DartsCount == 0) {
+                            gameStatus = "Player1";
+                            player2Title.setBackgroundColor(Color.TRANSPARENT);
+                            player2DartsCount = 0;
+                            visualizePlayer2Darts(player2DartsCount);
+
+                            player1Title.setBackgroundColor(Color.RED);
+                            player1DartsCount = 3;
+                            visualizePlayer1Darts(player1DartsCount);
+                        }
+
+//                    }
+                    if (scorePlayer2 == 0){
+
+                        player1Title.setBackgroundColor(Color.TRANSPARENT);
+                        player2Title.setBackgroundColor(Color.TRANSPARENT);
+                        TextView scoreView = findViewById(R.id.player2_score);
+                        scoreView.setText("WINNER");
+                        gameStatus = "GameOver";
+
+                        // Game Over
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "GAME OVER! Player 2 WINS", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
 
                 }
 
-
-            }
 
 
 
@@ -179,10 +252,7 @@ public class MainActivity extends AppCompatActivity {
         displayForPlayer1(scorePlayer1);
     }
 
-    public void displayForPlayer2(int score) {
-        TextView scoreView = findViewById(R.id.player2_score);
-        scoreView.setText(String.valueOf(score));
-    }
+
 
     public void add3TeamB (View view) {
         scorePlayer2 = scorePlayer2 + 3;
@@ -200,10 +270,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void scoreReset (View view) {
-        scorePlayer1 = 0;
-        scorePlayer2 = 0;
-        displayForPlayer1(scorePlayer1);
-        displayForPlayer2(scorePlayer2);
+
+        initiateNewGame();
     }
 
 }
