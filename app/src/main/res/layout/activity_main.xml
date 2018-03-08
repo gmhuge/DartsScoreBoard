@@ -107,7 +107,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:onClick="add3TeamA"
+                            android:onClick="player1x2"
                             android:textAllCaps="false"
                             android:backgroundTint="#00a2ff"
                             android:text="x 2" />
@@ -126,7 +126,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:onClick="add3TeamA"
+                            android:onClick="player1x3"
                             android:textAllCaps="false"
                             android:backgroundTint="#0062ff"
                             android:text="x 3" />
@@ -146,7 +146,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:layout_marginLeft="12dp"
-                        android:onClick="add3TeamA"
+                        android:onClick="player1outer"
                         android:backgroundTint="#09a90b"
                         android:text="outer" />
 
@@ -156,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:layout_marginRight="12dp"
-                        android:onClick="add2TeamA"
+                        android:onClick="player1bull"
                         android:backgroundTint="#a61313"
                         android:text="bull" />
                 </LinearLayout>
@@ -260,7 +260,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:backgroundTint="#00a2ff"
-                            android:onClick="add3TeamA"
+                            android:onClick="player2x2"
                             android:text="x 2"
                             android:textAllCaps="false" />
 
@@ -278,7 +278,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:onClick="add3TeamA"
+                            android:onClick="player2x3"
                             android:textAllCaps="false"
                             android:backgroundTint="#0062ff"
                             android:text="x 3" />
@@ -298,7 +298,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:layout_marginLeft="12dp"
-                        android:onClick="add3TeamA"
+                        android:onClick="player2outer"
                         android:backgroundTint="#09a90b"
                         android:text="outer" />
 
@@ -308,7 +308,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:layout_marginRight="12dp"
-                        android:onClick="add2TeamA"
+                        android:onClick="player2bull"
                         android:backgroundTint="#a61313"
                         android:text="bull" />
                 </LinearLayout>

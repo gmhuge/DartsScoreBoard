@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void initiateNewGame() {
 
-        scorePlayer1 = 30;
+        scorePlayer1 = 301;
         displayForPlayer1(scorePlayer1);
 
         scorePlayer2 = 301;
@@ -85,10 +85,41 @@ public class MainActivity extends AppCompatActivity {
         makeCast("Player1", player1picker.getValue());
     }
 
+    public  void player1x2 (View view) {
+        NumberPicker player1picker = findViewById(R.id.player1picker);
+        makeCast("Player1", player1picker.getValue()*2);
+    }
+    public  void player1x3 (View view) {
+        NumberPicker player1picker = findViewById(R.id.player1picker);
+        makeCast("Player1", player1picker.getValue()*3);
+    }
+
+    public  void player1outer (View view) {
+        makeCast("Player1", 25);
+    }
+    public  void player1bull (View view) {
+        makeCast("Player1", 50);
+    }
+
     public  void player2go (View view) {
 
         NumberPicker player2picker = findViewById(R.id.player2picker);
         makeCast("Player2", player2picker.getValue());
+    }
+    public  void player2x2 (View view) {
+        NumberPicker player2picker = findViewById(R.id.player2picker);
+        makeCast("Player2", player2picker.getValue()*2);
+    }
+    public  void player2x3 (View view) {
+        NumberPicker player2picker = findViewById(R.id.player2picker);
+        makeCast("Player2", player2picker.getValue()*3);
+    }
+
+    public  void player2outer (View view) {
+        makeCast("Player2", 25);
+    }
+    public  void player2bull (View view) {
+        makeCast("Player2", 50);
     }
 
     public void visualizePlayer1Darts (int count) {
