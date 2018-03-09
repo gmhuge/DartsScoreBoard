@@ -40,15 +40,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        NumberPicker player1icker = findViewById(R.id.player1picker);
-        player1icker.setMaxValue(20);
-        player1icker.setMinValue(1);
-        player1icker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        NumberPicker player1picker = findViewById(R.id.player1picker);
+        player1picker.setMaxValue(20);
+        player1picker.setMinValue(1);
+        player1picker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
-        NumberPicker player2icker = findViewById(R.id.player2picker);
-        player2icker.setMaxValue(20);
-        player2icker.setMinValue(1);
-        player2icker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        NumberPicker player2picker = findViewById(R.id.player2picker);
+        player2picker.setMaxValue(20);
+        player2picker.setMinValue(1);
+        player2picker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
 //        if (gameStatus.equals("")) {
 //          initiateNewGame();
@@ -76,7 +76,18 @@ public class MainActivity extends AppCompatActivity {
                 player1Title.setBackgroundColor(Color.TRANSPARENT);
                 player2Title.setBackgroundColor(Color.RED);
             }
-
+            else if (gameStatus.equals("GameOver") && scorePlayer1 == 0){
+                TextView scoreView = findViewById(R.id.player1_score);
+                scoreView.setText("WINNER");
+                player1Title.setBackgroundColor(Color.TRANSPARENT);
+                player2Title.setBackgroundColor(Color.TRANSPARENT);
+            }
+            else if (gameStatus.equals("GameOver") && scorePlayer2 == 0){
+                TextView scoreView = findViewById(R.id.player2_score);
+                scoreView.setText("WINNER");
+                player1Title.setBackgroundColor(Color.TRANSPARENT);
+                player2Title.setBackgroundColor(Color.TRANSPARENT);
+            }
         }
         else {
             initiateNewGame();
@@ -313,39 +324,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-//-----------------------------------------------------------------------------
 
-    public void add3TeamA (View view) {
-        scorePlayer1 = scorePlayer1 + 3;
-        displayForPlayer1(scorePlayer1);
-    }
-
-    public void add2TeamA (View view) {
-        scorePlayer1 = scorePlayer1 + 2;
-        displayForPlayer1(scorePlayer1);
-    }
-
-    public void addFreeTeamA (View view) {
-        scorePlayer1 = scorePlayer1 + 1;
-        displayForPlayer1(scorePlayer1);
-    }
-
-
-
-    public void add3TeamB (View view) {
-        scorePlayer2 = scorePlayer2 + 3;
-        displayForPlayer2(scorePlayer2);
-    }
-
-    public void add2TeamB (View view) {
-        scorePlayer2 = scorePlayer2 + 2;
-        displayForPlayer2(scorePlayer2);
-    }
-
-    public void addFreeTeamB (View view) {
-        scorePlayer2 = scorePlayer2 + 1;
-        displayForPlayer2(scorePlayer2);
-    }
 
     public void scoreReset (View view) {
 
