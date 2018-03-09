@@ -28,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
 
     String gameStatus = "";
 
+    private static final String KEY_SCORE_PLAYER1 = "SCORE_PLAYER1";
+    private static final String KEY_PLAYER1_DARTS_COUNT = "PLAYER1_DARTS_COUNT";
+    private static final String KEY_SCORE_PLAYER2 = "SCORE_PLAYER2";
+    private static final String KEY_PLAYER2_DARTS_COUNT = "PLAYER2_DARTS_COUNT";
+    private static final String KEY_GAME_STATUS = "GAME_STATUS";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +50,49 @@ public class MainActivity extends AppCompatActivity {
         player2icker.setMinValue(1);
         player2icker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
-        initiateNewGame();
-    }
+//        if (gameStatus.equals("")) {
+//          initiateNewGame();
+//        }
 
+        if (savedInstanceState != null) {
+            scorePlayer1 = savedInstanceState.getInt(KEY_SCORE_PLAYER1, 0);
+            displayForPlayer1(scorePlayer1);
+            scorePlayer2 = savedInstanceState.getInt(KEY_SCORE_PLAYER2, 0);
+            displayForPlayer2(scorePlayer2);
+            player1DartsCount = savedInstanceState.getInt(KEY_PLAYER1_DARTS_COUNT, 0);
+            visualizePlayer1Darts(player1DartsCount);
+            player2DartsCount = savedInstanceState.getInt(KEY_PLAYER2_DARTS_COUNT, 0);
+            visualizePlayer2Darts(player2DartsCount);
+            gameStatus = savedInstanceState.getString(KEY_GAME_STATUS, "");
+
+            TextView player1Title = findViewById(R.id.player1title);
+            TextView player2Title = findViewById(R.id.player2title);
+
+            if (gameStatus.equals("Player1")) {
+                player1Title.setBackgroundColor(Color.RED);
+                player2Title.setBackgroundColor(Color.TRANSPARENT);
+            }
+            else if (gameStatus.equals("Player2")){
+                player1Title.setBackgroundColor(Color.TRANSPARENT);
+                player2Title.setBackgroundColor(Color.RED);
+            }
+
+        }
+        else {
+            initiateNewGame();
+        }
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt(KEY_SCORE_PLAYER1, scorePlayer1);
+        outState.putInt(KEY_PLAYER1_DARTS_COUNT, player1DartsCount);
+        outState.putInt(KEY_SCORE_PLAYER2, scorePlayer2);
+        outState.putInt(KEY_PLAYER2_DARTS_COUNT, player2DartsCount);
+        outState.putString(KEY_GAME_STATUS, gameStatus);
+
+    }
     public void initiateNewGame() {
 
         scorePlayer1 = 301;
