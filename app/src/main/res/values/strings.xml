@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Darts Score Board</string>
+    <string name="player_1">Player 1</string>
+    <string name="go">Go</string>
+    <string name="x_3">x 3</string>
+    <string name="outer">outer</string>
+    <string name="bull">bull</string>
+    <string name="player_2">Player 2</string>
+    <string name="x_2">x 2</string>
+    <string name="reset">Reset</string>
+    <string name="winner">WINNER</string>
+    <string name="player1wins">GAME OVER! Player 1 WINS</string>
+    <string name="player2wins">GAME OVER! Player 2 WINS</string>
 </resources>
