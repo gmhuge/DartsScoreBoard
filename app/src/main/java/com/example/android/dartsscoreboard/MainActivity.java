@@ -22,6 +22,17 @@ public class MainActivity extends AppCompatActivity {
     int player1DartsCount = 0;
     int player2DartsCount = 0;
     String gameStatus = "";
+    private static final int MAX_NUMBERPICKER_VALUE = 20;
+    private static final int MIN_NUMBERPICKER_VALUE = 1;
+    private static final int MAX_DARTS_COUNT_VALUE = 3;
+    private static final int MIN_DARTS_COUNT_VALUE = 0;
+    private static final int MAX_SCORE_VALUE = 301;
+    private static final int MIN_SCORE_VALUE = 0;
+    private static final int X2_VALUE = 2;
+    private static final int X3_VALUE = 3;
+    private static final int OUTER_VALUE = 25;
+    private static final int BULL_VALUE = 50;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         NumberPicker player1picker = findViewById(R.id.player1picker);
-        player1picker.setMaxValue(20);
-        player1picker.setMinValue(1);
+        player1picker.setMaxValue(MAX_NUMBERPICKER_VALUE);
+        player1picker.setMinValue(MIN_NUMBERPICKER_VALUE);
         player1picker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
         NumberPicker player2picker = findViewById(R.id.player2picker);
-        player2picker.setMaxValue(20);
-        player2picker.setMinValue(1);
+        player2picker.setMaxValue(MAX_NUMBERPICKER_VALUE);
+        player2picker.setMinValue(MIN_NUMBERPICKER_VALUE);
         player2picker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
         if (savedInstanceState != null) {
@@ -88,10 +99,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void initiateNewGame() {
 
-        scorePlayer1 = 301;
+        scorePlayer1 = MAX_SCORE_VALUE;
         displayForPlayer1(scorePlayer1);
 
-        scorePlayer2 = 301;
+        scorePlayer2 = MAX_SCORE_VALUE;
         displayForPlayer2(scorePlayer2);
 
         gameStatus = "Player1";
@@ -101,10 +112,10 @@ public class MainActivity extends AppCompatActivity {
         TextView player2Title = findViewById(R.id.player2title);
         player2Title.setBackgroundColor(Color.TRANSPARENT);
 
-        player1DartsCount = 3;
+        player1DartsCount = MAX_DARTS_COUNT_VALUE;
         visualizePlayer1Darts(player1DartsCount);
 
-        player2DartsCount = 0;
+        player2DartsCount = MIN_DARTS_COUNT_VALUE;
         visualizePlayer2Darts(player2DartsCount);
     }
 
@@ -125,20 +136,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void player1x2(View view) {
         NumberPicker player1picker = findViewById(R.id.player1picker);
-        makeCast("Player1", player1picker.getValue() * 2);
+        makeCast("Player1", player1picker.getValue() * X2_VALUE);
     }
 
     public void player1x3(View view) {
         NumberPicker player1picker = findViewById(R.id.player1picker);
-        makeCast("Player1", player1picker.getValue() * 3);
+        makeCast("Player1", player1picker.getValue() * X3_VALUE);
     }
 
     public void player1outer(View view) {
-        makeCast("Player1", 25);
+        makeCast("Player1", OUTER_VALUE);
     }
 
     public void player1bull(View view) {
-        makeCast("Player1", 50);
+        makeCast("Player1", BULL_VALUE);
     }
 
     public void player2go(View view) {
@@ -149,20 +160,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void player2x2(View view) {
         NumberPicker player2picker = findViewById(R.id.player2picker);
-        makeCast("Player2", player2picker.getValue() * 2);
+        makeCast("Player2", player2picker.getValue() * X2_VALUE);
     }
 
     public void player2x3(View view) {
         NumberPicker player2picker = findViewById(R.id.player2picker);
-        makeCast("Player2", player2picker.getValue() * 3);
+        makeCast("Player2", player2picker.getValue() * X3_VALUE);
     }
 
     public void player2outer(View view) {
-        makeCast("Player2", 25);
+        makeCast("Player2", OUTER_VALUE);
     }
 
     public void player2bull(View view) {
-        makeCast("Player2", 50);
+        makeCast("Player2", BULL_VALUE);
     }
 
     public void visualizePlayer1Darts(int count) {
@@ -229,22 +240,22 @@ public class MainActivity extends AppCompatActivity {
                 visualizePlayer1Darts(player1DartsCount);
                 scorePlayer1Temporary = scorePlayer1;
                 scorePlayer1 = scorePlayer1 - rate;
-                if (scorePlayer1 < 0) {
+                if (scorePlayer1 < MIN_SCORE_VALUE) {
                     scorePlayer1 = scorePlayer1Temporary;
                 }
                 displayForPlayer1(scorePlayer1);
-                if (player1DartsCount == 0) {
+                if (player1DartsCount == MIN_DARTS_COUNT_VALUE) {
                     gameStatus = "Player2";
                     player1Title.setBackgroundColor(Color.TRANSPARENT);
-                    player1DartsCount = 0;
+                    player1DartsCount = MIN_DARTS_COUNT_VALUE;
                     visualizePlayer1Darts(player1DartsCount);
 
                     player2Title.setBackgroundColor(Color.RED);
-                    player2DartsCount = 3;
+                    player2DartsCount = MAX_DARTS_COUNT_VALUE;
                     visualizePlayer2Darts(player2DartsCount);
                 }
 
-                if (scorePlayer1 == 0) {
+                if (scorePlayer1 == MIN_SCORE_VALUE) {
 
                     player1Title.setBackgroundColor(Color.TRANSPARENT);
                     player2Title.setBackgroundColor(Color.TRANSPARENT);
@@ -263,23 +274,23 @@ public class MainActivity extends AppCompatActivity {
                 visualizePlayer2Darts(player2DartsCount);
                 scorePlayer2Temporary = scorePlayer2;
                 scorePlayer2 = scorePlayer2 - rate;
-                if (scorePlayer2 < 0) {
+                if (scorePlayer2 < MIN_SCORE_VALUE) {
                     scorePlayer2 = scorePlayer2Temporary;
                 }
 
                 displayForPlayer2(scorePlayer2);
-                if (player2DartsCount == 0) {
+                if (player2DartsCount == MIN_DARTS_COUNT_VALUE) {
                     gameStatus = "Player1";
                     player2Title.setBackgroundColor(Color.TRANSPARENT);
-                    player2DartsCount = 0;
+                    player2DartsCount = MIN_DARTS_COUNT_VALUE;
                     visualizePlayer2Darts(player2DartsCount);
 
                     player1Title.setBackgroundColor(Color.RED);
-                    player1DartsCount = 3;
+                    player1DartsCount = MAX_DARTS_COUNT_VALUE;
                     visualizePlayer1Darts(player1DartsCount);
                 }
 
-                if (scorePlayer2 == 0) {
+                if (scorePlayer2 == MIN_SCORE_VALUE) {
 
                     player1Title.setBackgroundColor(Color.TRANSPARENT);
                     player2Title.setBackgroundColor(Color.TRANSPARENT);
